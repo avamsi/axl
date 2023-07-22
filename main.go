@@ -109,7 +109,7 @@ func (c choice) String() string {
 }
 
 // Wait for a command to finish running.
-func (a *axl) Wait(ctx context.Context) {
+func (a *axl) Wait(ctx context.Context) error {
 	var (
 		stream  = tail(ctx, a.log())
 		cmds    = a.list(stream)
@@ -117,7 +117,7 @@ func (a *axl) Wait(ctx context.Context) {
 	)
 	switch len(cmds) {
 	case 0:
-		return
+		return nil
 	case 1:
 		waitFor = cmds[0]
 	default:
@@ -131,7 +131,7 @@ func (a *axl) Wait(ctx context.Context) {
 		sel, err := sp.RunPrompt()
 		waitFor = string(sel)
 		if errors.Is(err, promptkit.ErrAborted) {
-			return
+			return climate.ErrExit(130)
 		}
 		check.Nil(err)
 	}
@@ -141,12 +141,13 @@ func (a *axl) Wait(ctx context.Context) {
 		case "+ ": // Do nothing.
 		case "- ":
 			if line[2:] == waitFor {
-				return
+				return nil
 			}
 		default:
 			panic(line)
 		}
 	}
+	return nil
 }
 
 // axl internal commands, not for general use.
