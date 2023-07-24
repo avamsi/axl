@@ -1,11 +1,11 @@
 github.com/atotto/clipboard v0.1.4 h1:EH0zSVneZPSuFR11BlR9YppQTVDbh5+16AmcJi4g1z4=
 github.com/atotto/clipboard v0.1.4/go.mod h1:ZY9tmq7sm5xIbd9bOK4onWV4S6X0u6GY7Vn0Yu86PYI=
-github.com/avamsi/climate v0.0.0-20230917095831-5fa1d09c4ed6 h1:XXGpYn9jm60GZyglvsUg50h2ZYAO43KrrvPFGyd1S9M=
-github.com/avamsi/climate v0.0.0-20230917095831-5fa1d09c4ed6/go.mod h1:VeCu9ElFvgQ/ysCuJbU3gTW+0eupn/DT4ApGnZbYzjc=
-github.com/avamsi/climate/cmd/climate v0.0.0-20230917095831-5fa1d09c4ed6 h1:epNeRpi+J4REMwFg7kP9B2xaVh2HaDKUDpxSrimASJI=
-github.com/avamsi/climate/cmd/climate v0.0.0-20230917095831-5fa1d09c4ed6/go.mod h1:8DdVqLpu4n5mrB2Hgy9FgLnI5b1TvcRDQUZFswmcZvM=
-github.com/avamsi/ergo v0.0.0-20230913052809-930ba920a5a0 h1:rhBf7nsp4EK2Tpz73dvUU0KDbBqydiSwv0cHv9KOKYo=
-github.com/avamsi/ergo v0.0.0-20230913052809-930ba920a5a0/go.mod h1:0mfFMF4gcydxZBrgNqByISJqS9TsgzJIbkwnQFDeY3U=
+github.com/avamsi/climate v0.0.0-20230926035238-d75356147efc h1:4wlCa1QVjW9nScETEt0Y1pT61CjfQIiyci1bj/VoH0I=
+github.com/avamsi/climate v0.0.0-20230926035238-d75356147efc/go.mod h1:VeCu9ElFvgQ/ysCuJbU3gTW+0eupn/DT4ApGnZbYzjc=
+github.com/avamsi/climate/cmd/climate v0.0.0-20230926035238-d75356147efc h1:Xn/UtTmqsQXhjHe4dHZ0BSn1I6BOjrBUdddPXt0LT64=
+github.com/avamsi/climate/cmd/climate v0.0.0-20230926035238-d75356147efc/go.mod h1:8DdVqLpu4n5mrB2Hgy9FgLnI5b1TvcRDQUZFswmcZvM=
+github.com/avamsi/ergo v0.0.0-20230928064949-ee3c21551b95 h1:Ro0BcJaJTHcc2vGmWcLRxdRGtK5LRfS6KYcJQZdKcZw=
+github.com/avamsi/ergo v0.0.0-20230928064949-ee3c21551b95/go.mod h1:0mfFMF4gcydxZBrgNqByISJqS9TsgzJIbkwnQFDeY3U=
 github.com/aymanbagabas/go-osc52/v2 v2.0.1 h1:HwpRHbFMcZLEVr42D4p7XBqjyuxQH5SMiErDT4WkJ2k=
 github.com/aymanbagabas/go-osc52/v2 v2.0.1/go.mod h1:uYgXzlJ7ZpABp8OJ+exZzJJhRNQ2ASbcXHWsFqH8hp8=
 github.com/charmbracelet/bubbles v0.16.1 h1:6uzpAAaT9ZqKssntbvZMlksWHruQLNxg49H5WdeuYSY=

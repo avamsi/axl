@@ -3,9 +3,9 @@ module github.com/avamsi/axl
 go 1.20
 
 require (
-	github.com/avamsi/climate v0.0.0-20230917095831-5fa1d09c4ed6
-	github.com/avamsi/climate/cmd/climate v0.0.0-20230917095831-5fa1d09c4ed6
-	github.com/avamsi/ergo v0.0.0-20230913052809-930ba920a5a0
+	github.com/avamsi/climate v0.0.0-20230926035238-d75356147efc
+	github.com/avamsi/climate/cmd/climate v0.0.0-20230926035238-d75356147efc
+	github.com/avamsi/ergo v0.0.0-20230928064949-ee3c21551b95
 	github.com/djherbis/atime v1.1.0
 	github.com/erikgeiser/promptkit v0.9.0
 )

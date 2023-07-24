@@ -199,12 +199,11 @@ func (*internal) Notify(opts *notifyOptions) {
 	assert.Nil(err)
 }
 
-//go:generate go run github.com/avamsi/climate/cmd/climate --out=md.climate
-//go:embed md.climate
+//go:generate go run github.com/avamsi/climate/cmd/climate --out=md.cli
+//go:embed md.cli
 var md []byte
 
 func main() {
-	os.Exit(climate.Run(
-		climate.Struct[axl](climate.Struct[hooks](), climate.Struct[internal]()),
-		climate.Metadata(md)))
+	p := climate.Struct[axl](climate.Struct[hooks](), climate.Struct[internal]())
+	climate.RunAndExit(p, climate.WithMetadata(md))
 }
