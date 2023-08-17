@@ -3,11 +3,11 @@ module github.com/avamsi/axl
 go 1.20
 
 require (
-	github.com/avamsi/climate v0.0.0-20230724185352-057960e01f9f
-	github.com/avamsi/climate/cmd/climate v0.0.0-20230724185352-057960e01f9f
+	github.com/avamsi/climate v0.0.0-20230809054955-b3a4f697f9a9
+	github.com/avamsi/climate/cmd/climate v0.0.0-20230806105240-ff0f7364f107
 	github.com/avamsi/ergo v0.0.0-20230719202949-192c6ad84dcc
 	github.com/djherbis/atime v1.1.0
-	github.com/erikgeiser/promptkit v0.8.0
+	github.com/erikgeiser/promptkit v0.9.0
 )
 
 require (
@@ -30,10 +30,11 @@ require (
 	github.com/sanity-io/litter v1.5.5 // indirect
 	github.com/spf13/cobra v1.7.0 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
+	golang.org/x/exp v0.0.0-20230807204917-050eac23e9de // indirect
 	golang.org/x/mod v0.12.0 // indirect
 	golang.org/x/sync v0.3.0 // indirect
-	golang.org/x/sys v0.10.0 // indirect
-	golang.org/x/term v0.10.0 // indirect
-	golang.org/x/text v0.11.0 // indirect
-	golang.org/x/tools v0.11.0 // indirect
+	golang.org/x/sys v0.11.0 // indirect
+	golang.org/x/term v0.11.0 // indirect
+	golang.org/x/text v0.12.0 // indirect
+	golang.org/x/tools v0.12.0 // indirect
 )
