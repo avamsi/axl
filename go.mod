@@ -3,9 +3,9 @@ module github.com/avamsi/axl
 go 1.20
 
 require (
-	github.com/avamsi/climate v0.0.0-20230821090309-4d2233da7ee1
-	github.com/avamsi/climate/cmd/climate v0.0.0-20230821090309-4d2233da7ee1
-	github.com/avamsi/ergo v0.0.0-20230719202949-192c6ad84dcc
+	github.com/avamsi/climate v0.0.0-20230917095831-5fa1d09c4ed6
+	github.com/avamsi/climate/cmd/climate v0.0.0-20230917095831-5fa1d09c4ed6
+	github.com/avamsi/ergo v0.0.0-20230913052809-930ba920a5a0
 	github.com/djherbis/atime v1.1.0
 	github.com/erikgeiser/promptkit v0.9.0
 )
@@ -17,8 +17,11 @@ require (
 	github.com/charmbracelet/bubbletea v0.24.2 // indirect
 	github.com/charmbracelet/lipgloss v0.8.0 // indirect
 	github.com/containerd/console v1.0.4-0.20230313162750-1ae8d489ac81 // indirect
+	github.com/fatih/color v1.15.0 // indirect
+	github.com/gosuri/uitable v0.0.4 // indirect
 	github.com/inconshreveable/mousetrap v1.1.0 // indirect
 	github.com/lucasb-eyer/go-colorful v1.2.0 // indirect
+	github.com/mattn/go-colorable v0.1.13 // indirect
 	github.com/mattn/go-isatty v0.0.19 // indirect
 	github.com/mattn/go-localereader v0.0.1 // indirect
 	github.com/mattn/go-runewidth v0.0.15 // indirect
@@ -30,11 +33,11 @@ require (
 	github.com/sanity-io/litter v1.5.5 // indirect
 	github.com/spf13/cobra v1.7.0 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
-	golang.org/x/exp v0.0.0-20230817173708-d852ddb80c63 // indirect
+	golang.org/x/exp v0.0.0-20230905200255-921286631fa9 // indirect
 	golang.org/x/mod v0.12.0 // indirect
 	golang.org/x/sync v0.3.0 // indirect
-	golang.org/x/sys v0.11.0 // indirect
-	golang.org/x/term v0.11.0 // indirect
-	golang.org/x/text v0.12.0 // indirect
-	golang.org/x/tools v0.12.1-0.20230815132531-74c255bcf846 // indirect
+	golang.org/x/sys v0.12.0 // indirect
+	golang.org/x/term v0.12.0 // indirect
+	golang.org/x/text v0.13.0 // indirect
+	golang.org/x/tools v0.13.0 // indirect
 )

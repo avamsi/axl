@@ -24,7 +24,7 @@ Available Commands:
   wait        Wait for a command to finish running
 
 Flags:
-  -h, --help   help for axl
+  -h, --help  help for axl
 
 Use "axl [command] --help" for more information about a command.
 ```

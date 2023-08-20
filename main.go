@@ -16,7 +16,7 @@ import (
 	_ "embed"
 
 	"github.com/avamsi/climate"
-	"github.com/avamsi/ergo/check"
+	"github.com/avamsi/ergo/assert"
 	"github.com/djherbis/atime"
 	"github.com/erikgeiser/promptkit"
 	"github.com/erikgeiser/promptkit/selection"
@@ -40,7 +40,7 @@ func (*hooks) Zsh() {
 
 // TODO: maybe consider making the log file (or the username) configurable.
 func (*axl) log() string {
-	return fmt.Sprintf("/tmp/%s.axl", check.Ok(user.Current()).Username)
+	return fmt.Sprintf("/tmp/%s.axl", assert.Ok(user.Current()).Username)
 }
 
 // TODO: maybe consider using github.com/nxadm/tail?
@@ -48,15 +48,15 @@ func tail(ctx context.Context, file string) <-chan string {
 	cmd := exec.CommandContext(ctx, "tail", "--lines=42", "--follow=name", file)
 	cmd.Stderr = os.Stderr
 	var (
-		out    = bufio.NewScanner(check.Ok(cmd.StdoutPipe()))
+		out    = bufio.NewScanner(assert.Ok(cmd.StdoutPipe()))
 		stream = make(chan string)
 	)
-	check.Nil(cmd.Start())
+	assert.Nil(cmd.Start())
 	go func() {
 		for out.Scan() {
 			stream <- out.Text()
 		}
-		check.Nil(out.Err())
+		assert.Nil(out.Err())
 	}()
 	return stream
 }
@@ -92,7 +92,7 @@ func (*axl) list(stream <-chan string) []string {
 
 func beautify(cmd string) string {
 	secs, cmd, _ := strings.Cut(cmd, " ")
-	t := time.Unix(check.Ok(strconv.ParseInt(secs, 10, 64)), 0)
+	t := time.Unix(assert.Ok(strconv.ParseInt(secs, 10, 64)), 0)
 	return fmt.Sprintf("[⌚ %s] 💲 %s", t.Format("02 Jan 15:04"), cmd)
 }
 
@@ -134,7 +134,7 @@ func (a *axl) Wait(ctx context.Context) error {
 		if errors.Is(err, promptkit.ErrAborted) {
 			return climate.ErrExit(130)
 		}
-		check.Nil(err)
+		assert.Nil(err)
 	}
 	fmt.Println("⌛", beautify(waitFor))
 	for line := range stream {
@@ -177,7 +177,7 @@ func (*internal) Notify(opts *notifyOptions) {
 		return
 	}
 	// Use last access time of stdin as a proxy for user interaction.
-	interaction := atime.Get(check.Ok(os.Stdin.Stat()))
+	interaction := atime.Get(assert.Ok(os.Stdin.Stat()))
 	if now.Sub(interaction) < threshold {
 		return
 	}
@@ -186,14 +186,17 @@ func (*internal) Notify(opts *notifyOptions) {
 	if v, ok := os.LookupEnv("AXL_MESSAGE"); ok {
 		msg = v
 	}
-	t := template.Must(template.New("msg").Parse(msg))
-	t.Execute(os.Stdout, map[string]any{
-		"command": opts.Cmd,
-		"start":   start.Format(time.Kitchen),
-		"elapsed": elapsed.Round(time.Second),
-		"code":    opts.Code,
-		"host":    check.Ok(os.Hostname()),
-	})
+	var (
+		t   = template.Must(template.New("msg").Parse(msg))
+		err = t.Execute(os.Stdout, map[string]any{
+			"command": opts.Cmd,
+			"start":   start.Format(time.Kitchen),
+			"elapsed": elapsed.Round(time.Second),
+			"code":    opts.Code,
+			"host":    assert.Ok(os.Hostname()),
+		})
+	)
+	assert.Nil(err)
 }
 
 //go:generate go run github.com/avamsi/climate/cmd/climate --out=md.climate
