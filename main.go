@@ -10,13 +10,13 @@ import (
 	"os/user"
 	"strconv"
 	"strings"
+	"text/template"
 	"time"
 
 	_ "embed"
 
 	"github.com/avamsi/climate"
 	"github.com/avamsi/ergo/check"
-	"github.com/djherbis/atime"
 	"github.com/erikgeiser/promptkit"
 	"github.com/erikgeiser/promptkit/selection"
 )
@@ -176,18 +176,23 @@ func (*internal) Notify(opts *notifyOptions) {
 		return
 	}
 	// Use last access time of stdin as a proxy for user interaction.
-	interaction := atime.Get(check.Ok(os.Stdin.Stat()))
-	if now.Sub(interaction) < threshold {
-		return
+	// interaction := atime.Get(check.Ok(os.Stdin.Stat()))
+	// if now.Sub(interaction) < threshold {
+	// 	return
+	// }
+	msg := `💲 {{.command}}
+⌚ {{.start}} + ⌛ {{.elapsed}}{{if ne .code 0}} -> 🙅 {{.code}}{{end}} @ 💻 {{.host}}`
+	if v, ok := os.LookupEnv("AXL_MESSAGE"); ok {
+		msg = v
 	}
-	var code string
-	if opts.Code != 0 {
-		code = fmt.Sprintf(" -> 🙅 %d", opts.Code)
-	}
-	host := check.Ok(os.Hostname())
-	fmt.Printf("⌚ %s + ⌛ %s%s @ 💻 %s\n",
-		start.Format(time.Kitchen), elapsed.Round(time.Second), code, host)
-	fmt.Println("💲", opts.Cmd)
+	t := template.Must(template.New("msg").Parse(msg))
+	t.Execute(os.Stdout, map[string]any{
+		"command": opts.Cmd,
+		"start":   start.Format(time.Kitchen),
+		"elapsed": elapsed.Round(time.Second),
+		"code":    opts.Code,
+		"host":    check.Ok(os.Hostname()),
+	})
 }
 
 //go:generate go run github.com/avamsi/climate/cmd/climate --out=md.climate

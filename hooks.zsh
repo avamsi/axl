@@ -23,7 +23,7 @@ _axl_precmd() {
 		msg=$(axl internal notify \
 			--cmd="$_axl_cmd" --start-time="$_axl_start_time" --code=$code)
 		if [[ $msg != "" ]]; then
-			eval "$AXL_NOTIFY \"\$msg\"" &>/dev/null &!
+			print -- "$msg" | eval "$AXL_NOTIFY" &>/dev/null &!
 		fi
 	fi
 	# Reset back to nil since it's possible for _axl_precmd to be called without
