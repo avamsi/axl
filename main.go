@@ -17,6 +17,7 @@ import (
 
 	"github.com/avamsi/climate"
 	"github.com/avamsi/ergo/check"
+	"github.com/djherbis/atime"
 	"github.com/erikgeiser/promptkit"
 	"github.com/erikgeiser/promptkit/selection"
 )
@@ -176,10 +177,10 @@ func (*internal) Notify(opts *notifyOptions) {
 		return
 	}
 	// Use last access time of stdin as a proxy for user interaction.
-	// interaction := atime.Get(check.Ok(os.Stdin.Stat()))
-	// if now.Sub(interaction) < threshold {
-	// 	return
-	// }
+	interaction := atime.Get(check.Ok(os.Stdin.Stat()))
+	if now.Sub(interaction) < threshold {
+		return
+	}
 	msg := `💲 {{.command}}
 ⌚ {{.start}} + ⌛ {{.elapsed}}{{if ne .code 0}} -> 🙅 {{.code}}{{end}} @ 💻 {{.host}}`
 	if v, ok := os.LookupEnv("AXL_MESSAGE"); ok {
