@@ -34,7 +34,7 @@ Export AXL_NOTIFY to be notified when long running commands finish. Some example
 ```shell
 export AXL_NOTIFY=cat
 export AXL_NOTIFY="mail -s axl $USER"
-export AXL_NOTIFY="slack-cli -d $USER \$(cat)"
+export AXL_NOTIFY="slack-cli -d $USER"' "$(cat)"'
 ```
 
 Export AXL_MESSAGE (per https://pkg.go.dev/text/template) to customize the message.  
