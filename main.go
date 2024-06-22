@@ -52,6 +52,7 @@ func tail(ctx context.Context, file string) <-chan string {
 	)
 	assert.Nil(cmd.Start())
 	go func() {
+		defer close(stream)
 		for out.Scan() {
 			stream <- out.Text()
 		}
@@ -76,7 +77,7 @@ func (*axl) list(stream <-chan string) []string {
 			default:
 				panic(line)
 			}
-		case <-time.After(time.Millisecond):
+		case <-time.After(42 * time.Millisecond):
 			var out []string
 			for _, cmd := range cmds {
 				if !done[cmd] {
