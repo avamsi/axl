@@ -43,9 +43,8 @@ func (*axl) log() string {
 	return fmt.Sprintf("/tmp/%s.axl", assert.Ok(user.Current()).Username)
 }
 
-// TODO: maybe consider using github.com/nxadm/tail?
 func tail(ctx context.Context, file string) <-chan string {
-	cmd := exec.CommandContext(ctx, "tail", "--lines=42", "--follow=name", file)
+	cmd := exec.CommandContext(ctx, "tail", "-n 42", "-f", file)
 	cmd.Stderr = os.Stderr
 	var (
 		out    = bufio.NewScanner(assert.Ok(cmd.StdoutPipe()))
