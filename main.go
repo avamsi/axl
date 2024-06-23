@@ -5,6 +5,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"io"
 	"os"
 	"os/exec"
 	"os/user"
@@ -73,7 +74,9 @@ func (*axl) list(stream <-chan string) []string {
 			case "+ ":
 				cmds = append(cmds, line[2:])
 			case "- ":
-				done[line[2:]] = true
+				_, cmd, ok := strings.Cut(line[2:], " ")
+				assert.Truef(ok, "not exit code and command: %v", line[2:])
+				done[cmd] = true
 			default:
 				panic(line)
 			}
@@ -91,7 +94,8 @@ func (*axl) list(stream <-chan string) []string {
 }
 
 func beautify(cmd string) string {
-	secs, cmd, _ := strings.Cut(cmd, " ")
+	secs, cmd, ok := strings.Cut(cmd, " ")
+	assert.Truef(ok, "not start time and command: %v", cmd)
 	t := time.Unix(assert.Ok(strconv.ParseInt(secs, 10, 64)), 0)
 	return fmt.Sprintf("[⌚ %s] 💲 %s", t.Format("02 Jan 15:04"), cmd)
 }
@@ -141,14 +145,16 @@ func (a *axl) Wait(ctx context.Context) error {
 		switch line[:2] {
 		case "+ ": // Do nothing.
 		case "- ":
-			if line[2:] == waitFor {
-				return nil
+			code, cmd, ok := strings.Cut(line[2:], " ")
+			assert.Truef(ok, "not exit code and command: %v", line[2:])
+			if cmd == waitFor {
+				return climate.ErrExit(assert.Ok(strconv.Atoi(code)))
 			}
 		default:
 			panic(line)
 		}
 	}
-	return nil
+	return io.ErrUnexpectedEOF
 }
 
 // axl internal commands, not for general use.

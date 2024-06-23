@@ -17,7 +17,7 @@ _axl_precmd() {
 	# Note: it's important this be the first statement to capture the exit code.
 	local code=$?
 	[[ $_axl_cmd == _axl_nil ]] && return $code
-	print -- "- $_axl_start_time $_axl_cmd" >> "$_axl_log"
+	print -- "- $code $_axl_start_time $_axl_cmd" >> "$_axl_log"
 	if [[ $AXL_NOTIFY != "" ]]; then
 		local msg
 		msg=$(axl internal notify \
