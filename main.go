@@ -93,11 +93,13 @@ func (*axl) list(stream <-chan string) []string {
 	}
 }
 
+const timeLayout = "02 Jan 03:04 PM"
+
 func beautify(cmd string) string {
 	secs, cmd, ok := strings.Cut(cmd, " ")
 	assert.Truef(ok, "not start time and command: %v", cmd)
 	t := time.Unix(assert.Ok(strconv.ParseInt(secs, 10, 64)), 0)
-	return fmt.Sprintf("[⌚ %s] 💲 %s", t.Format("02 Jan 15:04"), cmd)
+	return fmt.Sprintf("[⌚ %s] 💲 %s", t.Format(timeLayout), cmd)
 }
 
 // List currently running commands.
@@ -148,6 +150,18 @@ func (a *axl) Wait(ctx context.Context) error {
 			code, cmd, ok := strings.Cut(line[2:], " ")
 			assert.Truef(ok, "not exit code and command: %v", line[2:])
 			if cmd == waitFor {
+				secs, cmd, ok := strings.Cut(cmd, " ")
+				assert.Truef(ok, "not start time and command: %v", cmd)
+				var (
+					start   = time.Unix(assert.Ok(strconv.ParseInt(secs, 10, 64)), 0)
+					elapsed = time.Since(start).Round(time.Second)
+					status  string
+				)
+				if code != "0" {
+					status = " -> 🙅 " + code
+				}
+				fmt.Printf("\033[F[⌚ %s + ⌛ %v%s] 💲 %s\n",
+					start.Format(timeLayout), elapsed, status, cmd)
 				return climate.ErrExit(assert.Ok(strconv.Atoi(code)))
 			}
 		default:
@@ -196,7 +210,7 @@ func (*internal) Notify(opts *notifyOptions) {
 		t   = template.Must(template.New("msg").Parse(msg))
 		err = t.Execute(os.Stdout, map[string]any{
 			"command": opts.Cmd,
-			"start":   start.Format(time.Kitchen),
+			"start":   start.Format(timeLayout),
 			"elapsed": elapsed.Round(time.Second),
 			"code":    opts.Code,
 			"host":    assert.Ok(os.Hostname()),
