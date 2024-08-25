@@ -6,14 +6,14 @@ _axl_log="/tmp/$(whoami).axl"
 _axl_cmd=_axl_nil
 _axl_start_time=_axl_nil
 
-_axl_preexec() {
+_axl_cmd_start() {
 	_axl_cmd=$1
 	_axl_start_time=$(date +%s)
 	print "+ $_axl_start_time $_axl_cmd" >> "$_axl_log"
 	chmod 600 "$_axl_log"
 }
 
-_axl_precmd() {
+_axl_cmd_finish() {
 	# Note: it's important this be the first statement to capture the exit code.
 	local code=$?
 	[[ $_axl_cmd == _axl_nil ]] && return $code
@@ -32,5 +32,5 @@ _axl_precmd() {
 	return $code
 }
 
-preexec_functions+=(_axl_preexec)
-precmd_functions+=(_axl_precmd)
+preexec_functions+=(_axl_cmd_start)
+precmd_functions+=(_axl_cmd_finish)
