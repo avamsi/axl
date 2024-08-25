@@ -1,4 +1,6 @@
-[[ $_axl_hooks_sourced ]] && return 0
+if [[ $_axl_hooks_sourced ]]; then
+	return 0
+fi
 _axl_hooks_sourced=true
 
 _axl_log="/tmp/$(whoami).axl"
@@ -16,13 +18,15 @@ _axl_cmd_start() {
 _axl_cmd_finish() {
 	# Note: it's important this be the first statement to capture the exit code.
 	local code=$?
-	[[ $_axl_cmd == _axl_nil ]] && return $code
 	print -- "- $code $_axl_start_time $_axl_cmd" >> "$_axl_log"
-	if [[ $AXL_NOTIFY != "" ]]; then
+	if [[ $_axl_cmd == _axl_nil ]]; then
+		return $code
+	fi
+	if [[ $AXL_NOTIFY ]]; then
 		local msg
 		msg=$(axl internal notify \
 			--cmd="$_axl_cmd" --start-time="$_axl_start_time" --code=$code)
-		if [[ $msg != "" ]]; then
+		if [[ $msg ]]; then
 			print -- "$msg" | eval "$AXL_NOTIFY" &>/dev/null &!
 		fi
 	fi
