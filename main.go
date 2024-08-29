@@ -9,6 +9,7 @@ import (
 	"os"
 	"os/exec"
 	"os/user"
+	"path"
 	"strconv"
 	"strings"
 	"text/template"
@@ -21,6 +22,7 @@ import (
 	"github.com/djherbis/atime"
 	"github.com/erikgeiser/promptkit"
 	"github.com/erikgeiser/promptkit/selection"
+	"github.com/google/shlex"
 )
 
 // axl watches over your commands.
@@ -217,6 +219,24 @@ func (*internal) Notify(opts *notifyOptions) {
 		})
 	)
 	assert.Nil(err)
+}
+
+// Suggest a command to run based on the most recently executed command.
+func (*internal) Suggest(cmd string) {
+	switch parts := assert.Ok(shlex.Split(cmd)); len(parts) {
+	case 2:
+		if parts[0] == "mkdir" {
+			fmt.Println("cd", parts[1])
+		}
+	case 3:
+		if parts[0] == "git" && parts[1] == "clone" {
+			fmt.Println("cd", path.Base(parts[2]))
+		}
+	case 4:
+		if parts[0] == "gh" && parts[1] == "repo" && parts[2] == "clone" {
+			fmt.Println("cd", path.Base(parts[3]))
+		}
+	}
 }
 
 //go:generate go run github.com/avamsi/climate/cmd/climate --out=md.cli

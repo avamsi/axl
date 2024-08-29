@@ -5,18 +5,19 @@ go 1.23
 toolchain go1.23.0
 
 require (
-	github.com/avamsi/climate v0.0.0-20240818111022-85724b3004da
+	github.com/avamsi/climate v0.0.0-20240827165527-1e885331f91f
 	github.com/avamsi/climate/cmd/climate v0.0.0-20231013095157-1a63f483d4ef
 	github.com/avamsi/ergo v0.0.0-20240818114324-3e186c704377
 	github.com/djherbis/atime v1.1.0
 	github.com/erikgeiser/promptkit v0.9.0
+	github.com/google/shlex v0.0.0-20191202100458-e7afc7fbc510
 )
 
 require (
 	github.com/atotto/clipboard v0.1.4 // indirect
 	github.com/aymanbagabas/go-osc52/v2 v2.0.1 // indirect
 	github.com/charmbracelet/bubbles v0.19.0 // indirect
-	github.com/charmbracelet/bubbletea v0.27.1 // indirect
+	github.com/charmbracelet/bubbletea v1.0.1 // indirect
 	github.com/charmbracelet/lipgloss v0.13.0 // indirect
 	github.com/charmbracelet/x/ansi v0.2.3 // indirect
 	github.com/charmbracelet/x/term v0.2.0 // indirect

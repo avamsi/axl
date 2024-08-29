@@ -1,7 +1,7 @@
 github.com/atotto/clipboard v0.1.4 h1:EH0zSVneZPSuFR11BlR9YppQTVDbh5+16AmcJi4g1z4=
 github.com/atotto/clipboard v0.1.4/go.mod h1:ZY9tmq7sm5xIbd9bOK4onWV4S6X0u6GY7Vn0Yu86PYI=
-github.com/avamsi/climate v0.0.0-20240818111022-85724b3004da h1:sjIt2IiOkCL+AMs6tPffJoNuc4nXUXjiCYm985HIlgY=
-github.com/avamsi/climate v0.0.0-20240818111022-85724b3004da/go.mod h1:i+4cNLUS/17OvRX4WoYte9tci2IGfB5CHwgkfItEknc=
+github.com/avamsi/climate v0.0.0-20240827165527-1e885331f91f h1:2JUG2IRzmN4JbjonTANtJe/Mvr1ePFspiCl13vupQ3A=
+github.com/avamsi/climate v0.0.0-20240827165527-1e885331f91f/go.mod h1:i+4cNLUS/17OvRX4WoYte9tci2IGfB5CHwgkfItEknc=
 github.com/avamsi/climate/cmd/climate v0.0.0-20231013095157-1a63f483d4ef h1:bu3kc/1E6nBgDvlHYyE08PJWlngIOkyLJ/6D3NuHShs=
 github.com/avamsi/climate/cmd/climate v0.0.0-20231013095157-1a63f483d4ef/go.mod h1:oCuycvHRY/yjqqcTQyusAXRSFY7BsvjBI+fju88PHco=
 github.com/avamsi/ergo v0.0.0-20240818114324-3e186c704377 h1:hjUJnyC0gRqKQ8ZdSCs0cYXth+ThCAzk9zMbW0Ay/xU=
@@ -10,8 +10,8 @@ github.com/aymanbagabas/go-osc52/v2 v2.0.1 h1:HwpRHbFMcZLEVr42D4p7XBqjyuxQH5SMiE
 github.com/aymanbagabas/go-osc52/v2 v2.0.1/go.mod h1:uYgXzlJ7ZpABp8OJ+exZzJJhRNQ2ASbcXHWsFqH8hp8=
 github.com/charmbracelet/bubbles v0.19.0 h1:gKZkKXPP6GlDk6EcfujDK19PCQqRjaJZQ7QRERx1UF0=
 github.com/charmbracelet/bubbles v0.19.0/go.mod h1:WILteEqZ+krG5c3ntGEMeG99nCupcuIk7V0/zOP0tOA=
-github.com/charmbracelet/bubbletea v0.27.1 h1:/yhaJKX52pxG4jZVKCNWj/oq0QouPdXycriDRA6m6r8=
-github.com/charmbracelet/bubbletea v0.27.1/go.mod h1:xc4gm5yv+7tbniEvQ0naiG9P3fzYhk16cTgDZQQW6YE=
+github.com/charmbracelet/bubbletea v1.0.1 h1:M89yCL4w2ekR7NiNw6s4JsbBE1NOuKdD7t6XEFdl1jw=
+github.com/charmbracelet/bubbletea v1.0.1/go.mod h1:xc4gm5yv+7tbniEvQ0naiG9P3fzYhk16cTgDZQQW6YE=
 github.com/charmbracelet/lipgloss v0.13.0 h1:4X3PPeoWEDCMvzDvGmTajSyYPcZM4+y8sCA/SsA3cjw=
 github.com/charmbracelet/lipgloss v0.13.0/go.mod h1:nw4zy0SBX/F/eAO1cWdcvy6qnkDUxr8Lw7dvFrAIbbY=
 github.com/charmbracelet/x/ansi v0.2.3 h1:VfFN0NUpcjBRd4DnKfRaIRo53KRgey/nhOoEqosGDEY=
@@ -30,6 +30,8 @@ github.com/erikgeiser/promptkit v0.9.0 h1:3qL1mS/ntCrXdb8sTP/ka82CJ9kEQaGuYXNrYJ
 github.com/erikgeiser/promptkit v0.9.0/go.mod h1:pU9dtogSe3Jlc2AY77EP7R4WFP/vgD4v+iImC83KsCo=
 github.com/google/go-cmp v0.6.0 h1:ofyhxvXcZhMsU5ulbFiLKl/XBFqE1GSq7atu8tAmTRI=
 github.com/google/go-cmp v0.6.0/go.mod h1:17dUlkBOakJ0+DkrSSNjCkIjxS6bF9zb3elmeNGIjoY=
+github.com/google/shlex v0.0.0-20191202100458-e7afc7fbc510 h1:El6M4kTTCOh6aBiKaUGG7oYTSPP8MxqL4YI3kZKwcP4=
+github.com/google/shlex v0.0.0-20191202100458-e7afc7fbc510/go.mod h1:pupxD2MaaD3pAXIBCelhxNneeOaAeabZDe5s4K6zSpQ=
 github.com/inconshreveable/mousetrap v1.1.0 h1:wN+x4NVGpMsO7ErUn/mUI3vEoE6Jt13X2s0bqwp9tc8=
 github.com/inconshreveable/mousetrap v1.1.0/go.mod h1:vpF70FUmC8bwa3OWnCshd2FqLfsEA9PFc4w1p2J65bw=
 github.com/lucasb-eyer/go-colorful v1.2.0 h1:1nnpGOrhyZZuNyfu1QjKiUICQ74+3FNCN69Aj6K7nkY=
