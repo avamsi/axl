@@ -41,7 +41,6 @@ func (*hooks) Zsh() {
 	fmt.Print(zsh)
 }
 
-// TODO: maybe consider making the log file (or the username) configurable.
 func (*axl) log() string {
 	return fmt.Sprintf("/tmp/%s.axl", assert.Ok(user.Current()).Username)
 }
@@ -170,14 +169,13 @@ func (a *axl) Wait(ctx context.Context) error {
 			panic(line)
 		}
 	}
-	return io.ErrUnexpectedEOF
+	panic(io.ErrUnexpectedEOF)
 }
 
 // axl internal commands, not for general use.
 type internal struct{}
 
 type notifyOptions struct {
-	Cmd       string
 	StartTime int64 // seconds from epoch
 	Code      int   // exit code
 }
@@ -185,7 +183,7 @@ type notifyOptions struct {
 const threshold = 42 * time.Second
 
 // Notify the user that a command has finished running.
-func (*internal) Notify(opts *notifyOptions) {
+func (*internal) Notify(opts *notifyOptions, cmd string) {
 	if opts.Code == 130 {
 		// 130 is SIGINT (mostly from Ctrl-C), no need to notify.
 		return
@@ -211,7 +209,7 @@ func (*internal) Notify(opts *notifyOptions) {
 	var (
 		t   = template.Must(template.New("msg").Parse(msg))
 		err = t.Execute(os.Stdout, map[string]any{
-			"command": opts.Cmd,
+			"command": cmd,
 			"start":   start.Format(timeLayout),
 			"elapsed": elapsed.Round(time.Second),
 			"code":    opts.Code,

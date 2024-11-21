@@ -30,8 +30,8 @@ _axl_cmd_finish() {
 	print -- "- $code $_axl_start_time $_axl_cmd" >> "$_axl_log"
 	if [[ $AXL_NOTIFY ]]; then
 		local msg
-		msg=$(axl internal notify \
-			--cmd="$_axl_cmd" --start-time="$_axl_start_time" --code=$code)
+		msg=$(axl internal notify "$_axl_cmd" \
+			--start-time="$_axl_start_time" --code=$code)
 		if [[ $msg ]]; then
 			print -- "$msg" | eval "$AXL_NOTIFY" &>/dev/null &!
 		fi
