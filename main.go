@@ -2,10 +2,13 @@ package main
 
 import (
 	"bufio"
+	"bytes"
 	"context"
+	"encoding/json"
 	"errors"
 	"fmt"
 	"io"
+	"net/http"
 	"os"
 	"os/exec"
 	"os/user"
@@ -172,7 +175,7 @@ func (a *axl) Wait(ctx context.Context) error {
 	panic(io.ErrUnexpectedEOF)
 }
 
-// axl internal commands, not for general use.
+// Internal commands, not for general use.
 type internal struct{}
 
 type renderOptions struct {
@@ -237,11 +240,31 @@ func (*internal) Suggest(cmd string) {
 	}
 }
 
+// Custom plugins for when CLIs are not readily available.
+type plugins struct{}
+
+type mattermostOptions struct {
+	webhookEndpoint string
+}
+
+// Mattermost a simple text message to the webhook endpoint.
+func (*plugins) Mattermost(opts *mattermostOptions) {
+	var (
+		msg     = assert.Ok(io.ReadAll(os.Stdin))
+		payload = assert.Ok(json.Marshal(map[string]string{"text": string(msg)}))
+		resp    = assert.Ok(http.Post(
+			opts.webhookEndpoint, "application/json", bytes.NewReader(payload)))
+	)
+	defer resp.Body.Close()
+	assert.True(resp.StatusCode == http.StatusOK, string(assert.Ok(io.ReadAll(resp.Body))))
+}
+
 //go:generate go run github.com/avamsi/climate/cmd/climate --out=md.cli
 //go:embed md.cli
 var md []byte
 
 func main() {
-	p := climate.Struct[axl](climate.Struct[hooks](), climate.Struct[internal]())
+	p := climate.Struct[axl](
+		climate.Struct[hooks](), climate.Struct[internal](), climate.Struct[plugins]())
 	climate.RunAndExit(p, climate.WithMetadata(md))
 }
