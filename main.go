@@ -175,15 +175,15 @@ func (a *axl) Wait(ctx context.Context) error {
 // axl internal commands, not for general use.
 type internal struct{}
 
-type notifyOptions struct {
+type renderOptions struct {
 	StartTime int64 // seconds from epoch
 	Code      int   // exit code
 }
 
 const threshold = 42 * time.Second
 
-// Notify the user that a command has finished running.
-func (*internal) Notify(opts *notifyOptions, cmd string) {
+// Render a command that has finished running.
+func (*internal) Render(opts *renderOptions, cmd string) {
 	if opts.Code == 130 {
 		// 130 is SIGINT (mostly from Ctrl-C), no need to notify.
 		return
